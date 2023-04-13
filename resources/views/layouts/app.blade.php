@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('template') }}/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('template') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     @livewireStyles
 
@@ -80,7 +82,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('template') }}/img/undraw_profile.svg">
                             </a>
@@ -153,7 +156,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
@@ -175,10 +178,13 @@
 
     <!-- Page level plugins -->
     <script src="{{ asset('template') }}/vendor/chart.js/Chart.min.js"></script>
+    <script src="{{ asset('template') }}/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('template') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('template') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('template') }}/js/demo/chart-pie-demo.js"></script>
+    <script src="{{ asset('template') }}/js/demo/datatables-demo.js"></script>
 
 </body>
 

@@ -23,10 +23,20 @@ class ProfilController extends Controller
    
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_user' => ['required', 'string', 'max:255'],
+            'password_new' => ['required', 'string', 'min:8'],
+        ]);
         $user = User::find($id);
         $user->name = $request->nama_user;
+
+        if($request->password_new == true){
+            $user->password = Hash::make($request->password_new);
+        }else{
+
+        }
         $user->save();
-        return redirect('/profil');
+        return redirect('/data-user')->with('success',"Profil Berhasil di Update");
         
     }
 

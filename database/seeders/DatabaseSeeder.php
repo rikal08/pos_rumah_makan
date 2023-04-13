@@ -36,5 +36,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123'),
             'level'=>3
         ]);
+
+        
     }
 }

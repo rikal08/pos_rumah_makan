@@ -3,22 +3,33 @@
 
 @section('content')
     <div class="card shadow mb-4">
+        <div class="card-header">
+            @if (session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+            @if (session()->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
         </div>
         <div class="card-header py-3">
             <a href="" class="btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">Tambah Data</a>
         </div>
-        @if (session()->has('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session()->get('success') }}
-            </div>
-        @endif
-        @if (session()->has('error'))
-            <div class="alert alert-danger" role="alert">
-                {{ session()->get('error') }}
-            </div>
-        @endif
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -51,11 +62,11 @@
                                 </td>
                                 <td>
                                     @if ($data->level == 1)
-                                        <a href="" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                        <a href="" data-toggle="modal" data-target="#updateModal{{ $data->id }}" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                     @else
                                         <a href="" data-toggle="modal" data-target="#hapusModal{{ $data->id }}"
                                             class="btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                        <a href="" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                        <a href="" data-toggle="modal" data-target="#updateModal{{ $data->id }}" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                     @endif
                                 </td>
                             </tr>
@@ -85,7 +96,49 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- ends --}}
+                            {{-- end --}}
+
+                            {{-- update --}}
+                            <div class="modal fade" id="updateModal{{ $data->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Updatew User</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form autocomplete="off" action="{{ url('data-user',$data->id) }}" method="POST">
+                                            @method('PUT')
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="">Nama</label>
+                                                    <input type="text" value="{{ $data->name }}" class="form-control" placeholder="Masukan Nama.."
+                                                        name="name" id="name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Email</label>
+                                                    <input readonly value="{{ $data->email }}" type="text" class="form-control" placeholder="Masukan Email.."
+                                                        name="email" id="nama_user">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">New Password</label>
+                                                    <input type="text"  class="form-control"
+                                                        placeholder="Masukan Password.." name="password" id="password">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- end --}}
                         @endforeach
                     </tbody>
                 </table>

@@ -18,20 +18,55 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('page/master/data-user',['user'=>$user]);
+        return view('page.master.data-user',['user'=>$user]);
     }
 
 
     protected function store(Request $request)
     {
-        return User::create([
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'level' => ['required'],
+        ]);
+
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'level'=> $request->level,
         ]);
 
+        return redirect('/data-user')->with('success',"Data Berhasil Disimpan");
 
+
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        
+        
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            
+        ]);
+        $user = User::find($id);
+        $user->name = $request->name;
+
+        if($request->password == true){
+            $request->validate([
+                'password' => ['required', 'string', 'min:8'],
+            ]);
+            $user->password = $request->password;
+        }else{
+
+        }
+        
+        $user->save();
+        return redirect('/data-user')->with('success',"Data Berhasil Diupdate");
+        
     }
 
     public function destroy($id)
@@ -40,6 +75,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect('/data-user')->flash('success',"Category Deleted Successfully!!");;
+        return redirect('/data-user')->with('error',"Data Berhasil Dihapus");
     }
 }

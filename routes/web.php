@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('profil', ProfilController::class);
 // route user
 Route::resource('data-user',UserController::class);
+// route kategori
+Route::resource('kategori', KategoriController::class);
+// pelanggan
+Route::resource('pelanggan',PelangganController::class);
