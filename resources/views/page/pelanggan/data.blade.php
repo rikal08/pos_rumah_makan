@@ -25,7 +25,7 @@
         @endif
     </div>
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Pelanggan</h6>
     </div>
     <div class="card-header py-3">
         <a href="" class="btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">Tambah Data</a>
@@ -55,9 +55,12 @@
                             <td>{{ $data->email }}</td>
                             <td>{{ $data->alamat }}</td>
                             <td>
-
+                                <a href="" data-toggle="modal" data-target="#updateModal{{ $data->id_pelanggan }}" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                <a href="" data-toggle="modal" data-target="#hapusModal{{ $data->id_pelanggan }}" class="btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
+                        @include('page.pelanggan.hapus') 
+                        @include('page.pelanggan.update') 
                     @endforeach
                 </tbody>
             </table>
