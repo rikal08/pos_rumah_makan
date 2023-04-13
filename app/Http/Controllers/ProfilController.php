@@ -21,37 +21,12 @@ class ProfilController extends Controller
     }
 
    
-    public function create()
-    {
-        //
-    }
-
-   
-    public function store(Request $request)
-    {
-        //
-    }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
-   
-    public function edit($id)
-    {
-        //
-    }
-
-   
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
         $user->name = $request->nama_user;
-        
         $user->save();
+        return redirect('/profil');
         
     }
 

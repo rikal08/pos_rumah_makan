@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfilController;
 
 /*
@@ -23,4 +24,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // route profil
-Route::resource('/profil', ProfilController::class);
+Route::resource('profil', ProfilController::class);
+// route user
+Route::resource('data-user',UserController::class);

@@ -20,13 +20,13 @@
                         <div class="form-group">
                             <label for="">Email</label>
                             <input type="text" readonly class="form-control" value="{{ $user->email }}"
-                                placeholder="Nama User" name="nama_user">
+                                placeholder="Nama User" name="email">
                         </div>
                         <div class="form-group">
                             <label for="">Level</label>
                             <input type="text" readonly class="form-control"
                                 value="@if ($user->level == 1) Admin @elseif($user->level == 2) Pimpinan @else Kasir @endif"
-                                placeholder="Nama User" name="nama_user">
+                                placeholder="Nama User" name="level">
                         </div>
                         <hr>
                         <div class="form-group">

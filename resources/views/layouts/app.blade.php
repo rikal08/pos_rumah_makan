@@ -20,6 +20,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('template') }}/css/sb-admin-2.min.css" rel="stylesheet">
 
+    @livewireStyles
+
 </head>
 
 <body id="page-top">
@@ -44,6 +46,10 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+
+            {{-- Menu User Star --}}
+            @include('layouts.menu-user')
+            {{-- Menu User End --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -74,7 +80,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('template') }}/img/undraw_profile.svg">
                             </a>
@@ -156,7 +162,7 @@
             </div>
         </div>
     </div>
-
+    @livewireScripts
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('template') }}/vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('template') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
