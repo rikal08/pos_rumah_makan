@@ -37,4 +37,7 @@ Route::resource('member',MemberController::class);
 // produk
 Route::resource('produk',ProdukController::class);
 Route::get('get-produk', [App\Http\Controllers\ProdukController::class, 'get_produk']);
+Route::post('cari-produk', [App\Http\Controllers\ProdukController::class, 'cari_produk']);
+Route::post('cetak-laporan-produk', [App\Http\Controllers\ProdukController::class, 'cetak_laporan']);
 Route::post('hapus-produk', [App\Http\Controllers\ProdukController::class, 'hapus_produk']);
+Route::post('ganti-foto-produk/{id}', [App\Http\Controllers\ProdukController::class, 'ganti_foto_produk']);

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>RM. Cahaya Perkasa - Dashboard</title>
 
@@ -189,7 +190,12 @@
 
     {{-- AJAX --}}
     <script>
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
+        $.ajaxSetup({
+            headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
+        });
+    
         showproduk();
         function showproduk() {
             $.ajax({
@@ -205,7 +211,18 @@
             $('#id_produk_delete').val(id);
             $('#hapusModalProduk').modal('show');
         }
-           
+        
+        $("#cari_by_kategori").click(function(){
+            var id_kategori = $("#id_kategori").val();
+            $.ajax({
+                url: "{{ url('cari-produk') }}",
+                type: 'POST',
+                data: {id_kategori:id_kategori},
+                success: function(data) {
+                    $('#getproduk').html(data);
+                }
+            });
+        })
     </script>
 
 </body>

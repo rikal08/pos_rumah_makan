@@ -25,6 +25,8 @@
                                 <option value="{{ $data_k->id_kategori }}">{{ $data_k->nama_kategori }}</option>
                             @endforeach
                          </select>
+
+                         <a href="" class="btn btn-primary">Input Kategori</a>
                      </div>
                 
                      <div class="form-group">

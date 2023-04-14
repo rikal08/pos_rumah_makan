@@ -25,10 +25,28 @@
         @endif
     </div>
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Kategori</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Produk</h6>
     </div>
     <div class="card-header py-3">
         <a href="" class="btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">Tambah Data</a>
+    </div>
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <select class="form-control" name="id_kategori" id="id_kategori">
+                        <option value="0">All</option>
+                        @foreach ($kategori as $item)
+                            <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <button type="submit" id="cari_by_kategori" class="btn btn-primary">Cari</button>
+                <a href="" data-toggle="modal" data-target="#cetakLaporan" class="btn btn-danger"><i class="fa fa-print"></i> Cetak Laporan</a>
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -53,6 +71,7 @@
     </div>
 </div>
 
+@include('page.produk.form-cetak')
 @include('page.produk.tambah')
 @include('page.produk.hapus')
 @endsection
