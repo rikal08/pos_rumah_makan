@@ -7,6 +7,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PengeluaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,6 @@ Route::post('cari-produk', [App\Http\Controllers\ProdukController::class, 'cari_
 Route::post('cetak-laporan-produk', [App\Http\Controllers\ProdukController::class, 'cetak_laporan']);
 Route::post('hapus-produk', [App\Http\Controllers\ProdukController::class, 'hapus_produk']);
 Route::post('ganti-foto-produk/{id}', [App\Http\Controllers\ProdukController::class, 'ganti_foto_produk']);
+
+// pengeluaran
+Route::resource('pengeluaran',PengeluaranController::class);

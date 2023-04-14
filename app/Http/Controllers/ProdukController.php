@@ -128,7 +128,7 @@ class ProdukController extends Controller
         }else{
             $produk = DB::table('produk')->join('kategori','produk.id_kategori','=','kategori.id_kategori')->orderBy('produk.id_kategori')->get();
         }
-        $pdf = PDF::loadView('page.produk.print', ['produk'=>$produk])->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('page.produk.print', ['produk'=>$produk])->setPaper('a4', 'landscape');
      
         return $pdf->download('laporan_produk.pdf');
 
