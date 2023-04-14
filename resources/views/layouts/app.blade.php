@@ -166,6 +166,7 @@
         </div>
     </div>
     @livewireScripts
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('template') }}/vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('template') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -185,6 +186,27 @@
     <script src="{{ asset('template') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('template') }}/js/demo/chart-pie-demo.js"></script>
     <script src="{{ asset('template') }}/js/demo/datatables-demo.js"></script>
+
+    {{-- AJAX --}}
+    <script>
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
+        showproduk();
+        function showproduk() {
+            $.ajax({
+                url: "{{ url('get-produk') }}",
+                type: 'get',
+                success: function(data) {
+                    $('#getproduk').html(data);
+                }
+            });
+        }
+
+        function loadDeleteModal(id) {
+            $('#id_produk_delete').val(id);
+            $('#hapusModalProduk').modal('show');
+        }
+           
+    </script>
 
 </body>
 

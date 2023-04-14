@@ -20,3 +20,9 @@
         <i class="fas fa-fw fa-users"></i>
         <span>Member</span></a>
 </li>
+
+<li class="nav-item {{ request()->is('produk') ? 'active' : ''}}">
+    <a class="nav-link" href="{{ url('produk') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Produk</span></a>
+</li>

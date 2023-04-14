@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\PelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,9 @@ Route::resource('profil', ProfilController::class);
 Route::resource('data-user',UserController::class);
 // route kategori
 Route::resource('kategori', KategoriController::class);
-// // pelanggan
-// Route::resource('pelanggan',PelangganController::class);
 // member
 Route::resource('member',MemberController::class);
+// produk
+Route::resource('produk',ProdukController::class);
+Route::get('get-produk', [App\Http\Controllers\ProdukController::class, 'get_produk']);
+Route::post('hapus-produk', [App\Http\Controllers\ProdukController::class, 'hapus_produk']);
