@@ -4,18 +4,18 @@ aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tambah Pelanggan</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Tambah Member</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form action="{{ url('pelanggan') }}" method="POST">
+        <form action="{{ url('member') }}" method="POST">
             @method('POST')
             @csrf
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="">Nama Pelanggan</label>
-                    <input type="text" class="form-control" placeholder="Masukan Nama.." name="nama_pelanggan">
+                    <label for="">Nama Member</label>
+                    <input type="text" class="form-control" placeholder="Masukan Nama.." name="nama_member">
                 </div>
                 <div class="form-group">
                     <label for="">Telepon</label>

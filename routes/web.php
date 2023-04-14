@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
@@ -31,5 +32,7 @@ Route::resource('profil', ProfilController::class);
 Route::resource('data-user',UserController::class);
 // route kategori
 Route::resource('kategori', KategoriController::class);
-// pelanggan
-Route::resource('pelanggan',PelangganController::class);
+// // pelanggan
+// Route::resource('pelanggan',PelangganController::class);
+// member
+Route::resource('member',MemberController::class);

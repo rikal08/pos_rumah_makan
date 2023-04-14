@@ -15,8 +15,8 @@
     </div>
 </li>
 
-<li class="nav-item {{ request()->is('pelanggan') ? 'active' : ''}}">
-    <a class="nav-link" href="{{ url('pelanggan') }}">
+<li class="nav-item {{ request()->is('member') ? 'active' : ''}}">
+    <a class="nav-link" href="{{ url('member') }}">
         <i class="fas fa-fw fa-users"></i>
-        <span>Pelanggan</span></a>
+        <span>Member</span></a>
 </li>

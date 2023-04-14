@@ -25,7 +25,7 @@
         @endif
     </div>
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pelanggan</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Member</h6>
     </div>
     <div class="card-header py-3">
         <a href="" class="btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">Tambah Data</a>
@@ -36,7 +36,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Pelanggan</th>
+                        <th>Nama Member</th>
                         <th>Telepon</th>
                         <th>Email</th>
                         <th>Alamat</th>
@@ -47,20 +47,20 @@
                     $no = 1;
                 @endphp
                 <tbody>
-                    @foreach ($pelanggan as $data)
+                    @foreach ($member as $data)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $data->nama_pelanggan }}</td>
+                            <td>{{ $data->nama_member }}</td>
                             <td>{{ $data->telepon }}</td>
                             <td>{{ $data->email }}</td>
                             <td>{{ $data->alamat }}</td>
                             <td>
-                                <a href="" data-toggle="modal" data-target="#updateModal{{ $data->id_pelanggan }}" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                <a href="" data-toggle="modal" data-target="#hapusModal{{ $data->id_pelanggan }}" class="btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="" data-toggle="modal" data-target="#updateModal{{ $data->id_member }}" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                <a href="" data-toggle="modal" data-target="#hapusModal{{ $data->id_member }}" class="btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
-                        @include('page.pelanggan.hapus') 
-                        @include('page.pelanggan.update') 
+                        @include('page.member.hapus') 
+                        @include('page.member.update') 
                     @endforeach
                 </tbody>
             </table>
@@ -68,5 +68,5 @@
     </div>
 </div>
 
-@include('page.pelanggan.tambah')
+@include('page.member.tambah')
 @endsection
