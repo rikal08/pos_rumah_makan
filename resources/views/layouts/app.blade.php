@@ -27,13 +27,13 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion {{ request()->is('pos') ? 'toggled' : ''}}" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -79,14 +79,13 @@
                     </button>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        {{-- POS --}}
-                        <li class="nav-item dropdown no-arrow mr-5">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-shopping-card fa-fw"> POS</i>
+                        {{-- POs --}}
+                        <li class="nav-item no-arrow">
+                            <a class="nav-link btn btn-primary mr-5 h-50 mt-3" href="{{ url('pos') }}" id="userDropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-shopping-cart"></i>SISTEM POS
                             </a>
                         </li>
-                        {{-- POS --}}
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -233,6 +232,47 @@
                 }
             });
         })
+    </script>
+
+    <script>
+       function addCart($id) {
+            var no_transaksi = $("#no_transaksi").val();
+            var id_produk = $id;
+            $.ajax({
+                url: "{{ url('add-cart') }}",
+                type: 'POST',
+                data: {no_kategori:no_kategori,id_produk:id_produk,harga_jual:harga_jual,jumlah:jumlah,diskon:diskon},
+                success: function(data) {
+                    
+                }
+            });
+       }
+       
+       showCart();
+        function showCart() {
+            var no_transaksi = $("#no_transaksi").val();
+            $.ajax({
+                url: "{{ url('show-cart') }}",
+                type: 'POST',
+                data:{no_transaksi:no_transaksi},
+                success: function(data) {
+                    $('#showCart').html(data);
+                   
+                }
+            });
+        }
+        showFormCart();
+        function showFormCart() {
+            var no_transaksi = $("#no_transaksi").val();
+            $.ajax({
+                url: "{{ url('show-form-cart') }}",
+                type: 'POST',
+                data:{no_transaksi:no_transaksi},
+                success: function(data) {
+                    $('#total_harga').val(0);
+                }
+            });
+        }
     </script>
 
 </body>

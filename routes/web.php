@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PengeluaranController;
 
 /*
@@ -46,3 +48,11 @@ Route::post('ganti-foto-produk/{id}', [App\Http\Controllers\ProdukController::cl
 // pengeluaran
 Route::resource('pengeluaran',PengeluaranController::class);
 Route::post('cetak-laporan-pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'cetak_laporan']);
+
+// penjualan
+Route::resource('penjualan',PenjualanController::class);
+
+// POS
+Route::resource('pos',PosController::class);
+Route::post('show-cart', [App\Http\Controllers\PosController::class, 'show_cart']);
+Route::post('show-form-cart', [App\Http\Controllers\PosController::class, 'show_form_cart']);
