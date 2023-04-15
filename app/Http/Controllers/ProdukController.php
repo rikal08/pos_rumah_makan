@@ -61,7 +61,7 @@ class ProdukController extends Controller
 
         Produk::create([
             'id_kategori'=>$request->id_kategori,
-            'nama_produk'=>$request->nama_produk,
+            'nama_produk'=>strtoupper($request->nama_produk),
             'harga'=>$request->harga,
             'diskon'=>$request->diskon,
             'stok'=>$request->stok,
@@ -110,7 +110,7 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
 
         $produk->id_kategori = $request->id_kategori;
-        $produk->nama_produk = $request->nama_produk;
+        $produk->nama_produk = strtoupper($request->nama_produk);
         $produk->harga = $request->harga;
         $produk->diskon = $request->diskon;
         $produk->stok = $request->stok;

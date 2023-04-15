@@ -25,7 +25,7 @@ class KategoriController extends Controller
         ]);
 
         Kategori::create([
-            'nama_kategori' => $request->nama_kategori,
+            'nama_kategori' => strtoupper($request->nama_kategori),
         ]);
 
         return redirect('/kategori')->with('success',"Data Berhasil Disimpan");
@@ -37,7 +37,7 @@ class KategoriController extends Controller
     {
     
         $kategori = Kategori::find($id);
-        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->nama_kategori = strtoupper($request->nama_kategori);
 
         
         $kategori->save();

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\Pengeluaran;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PengeluaranController extends Controller
 {
@@ -26,8 +29,9 @@ class PengeluaranController extends Controller
         ]);
 
         Pengeluaran::create([
-            'deskripsi'=>$request->deskripsi,
-            'nominal'=>$request->nominal
+            'deskripsi'=>strtoupper($request->deskripsi),
+            'nominal'=>$request->nominal,
+            'created_at'=>$request->created_at,
         ]);
 
         return redirect('pengeluaran')->with('success',"Data Berhasil Disimpan");
@@ -53,6 +57,20 @@ class PengeluaranController extends Controller
 
     }
 
+    public function cetak_laporan(Request $request)
+    {
+        $tgl_awal = Carbon::createFromFormat('Y-m-d', $request->tgl_awal);
+        $tgl_akhir = Carbon::createFromFormat('Y-m-d', $request->tgl_akhir);
+        $pengeluaran = Pengeluaran::query()
+                        ->whereDate('created_at', '>=', $tgl_awal)
+                        ->whereDate('created_at', '<=', $tgl_akhir)
+                        ->get();
+
+        $pdf = Pdf::loadView('page.pengeluaran.print', ['pengeluaran'=>$pengeluaran,'tgl_awal'=>$tgl_awal,'tgl_akhir'=>$tgl_akhir])->setPaper('a4', 'landscape');
+     
+        return $pdf->download('laporan_pengeluaran.pdf');
+
+    }
     public function destroy($id)
     {
         $pengeluaran = Pengeluaran::find($id);

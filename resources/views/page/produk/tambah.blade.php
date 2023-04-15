@@ -26,7 +26,7 @@
                             @endforeach
                          </select>
 
-                         <a href="" class="btn btn-primary">Input Kategori</a>
+                        
                      </div>
                 
                      <div class="form-group">

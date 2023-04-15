@@ -26,9 +26,12 @@
     </div>
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Data Pengeluaran</h6>
+
+       
     </div>
     <div class="card-header py-3">
         <a href="" class="btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">Tambah Data</a>
+        <a href="" data-toggle="modal" data-target="#cetakLaporan" class="btn-sm btn-danger"><i class="fa fa-print"></i> Laporan Pengeluaran</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -65,5 +68,5 @@
         </div>
     </div>
 </div>
-@include('page.pengeluaran.tambah')
+@include('page.pengeluaran.form-cetak')
 @endsection

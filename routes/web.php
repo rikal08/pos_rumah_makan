@@ -45,3 +45,4 @@ Route::post('ganti-foto-produk/{id}', [App\Http\Controllers\ProdukController::cl
 
 // pengeluaran
 Route::resource('pengeluaran',PengeluaranController::class);
+Route::post('cetak-laporan-pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'cetak_laporan']);

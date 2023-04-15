@@ -14,6 +14,10 @@ aria-hidden="true">
             @csrf
             <div class="modal-body">
                 <div class="form-group">
+                    <label for="">Tanggan</label>
+                    <input type="datetime-local" name="created_at" value="{{ date('Y-m-d H:i:s') }}" class="form-control">
+                </div>
+                <div class="form-group">
                     <label for="">Nominal Pengeluaran</label>
                     <input type="nominal" class="form-control" placeholder="Masukan Nominal.." name="nominal">
                 </div>

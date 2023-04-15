@@ -16,5 +16,6 @@ class Pengeluaran extends Model
     protected $fillable = [
         'deskripsi',
         'nominal',
+        'created_at',
     ];
 }

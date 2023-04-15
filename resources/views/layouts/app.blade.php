@@ -79,6 +79,14 @@
                     </button>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        {{-- POS --}}
+                        <li class="nav-item dropdown no-arrow mr-5">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-shopping-card fa-fw"> POS</i>
+                            </a>
+                        </li>
+                        {{-- POS --}}
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -102,6 +110,8 @@
                                 </a>
                             </div>
                         </li>
+
+                       
 
                     </ul>
 
