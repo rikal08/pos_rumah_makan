@@ -51,8 +51,14 @@ Route::post('cetak-laporan-pengeluaran', [App\Http\Controllers\PengeluaranContro
 
 // penjualan
 Route::resource('penjualan',PenjualanController::class);
+Route::post('cetak-laporan-penjualan', [App\Http\Controllers\PenjualanController::class, 'cetak_laporan']);
 
 // POS
 Route::resource('pos',PosController::class);
 Route::post('show-cart', [App\Http\Controllers\PosController::class, 'show_cart']);
 Route::post('show-form-cart', [App\Http\Controllers\PosController::class, 'show_form_cart']);
+Route::post('add-cart', [App\Http\Controllers\PosController::class, 'add_cart']);
+Route::post('kurang-cart', [App\Http\Controllers\PosController::class, 'kurang_cart']);
+Route::post('hapus-cart', [App\Http\Controllers\PosController::class, 'hapus_cart']);
+Route::post('simpan-penjualan', [App\Http\Controllers\PosController::class, 'simpan_penjualan']);
+Route::post('cetak-faktur', [App\Http\Controllers\PosController::class, 'cetak_faktur']);

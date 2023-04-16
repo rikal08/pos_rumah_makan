@@ -91,7 +91,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} (@if(Auth::user()->level==1) Admin @elseif(Auth::user()->level==2) Pimpinan @else Kasir @endif)</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('template') }}/img/undraw_profile.svg">
                             </a>
@@ -233,21 +233,50 @@
             });
         })
     </script>
-
+    
     <script>
+    // TAMBAH ITEM
        function addCart($id) {
             var no_transaksi = $("#no_transaksi").val();
+            var jumlah = $("#jumlah_add").val();
             var id_produk = $id;
             $.ajax({
                 url: "{{ url('add-cart') }}",
                 type: 'POST',
-                data: {no_kategori:no_kategori,id_produk:id_produk,harga_jual:harga_jual,jumlah:jumlah,diskon:diskon},
+                data: {no_transaksi:no_transaksi,id_produk:id_produk,jumlah:jumlah},
                 success: function(data) {
-                    
+                    showCart();
+                    showFormCart();
                 }
             });
        }
-       
+    // KURANGI ITEM
+       function kurangCart($id) {
+            var id_detail = $id;
+            $.ajax({
+                url: "{{ url('kurang-cart') }}",
+                type: 'POST',
+                data: {id_detail:id_detail},
+                success: function(data) {
+                    showCart();
+                    showFormCart();
+                }
+            });
+       }
+    //    HAPUS ITEM
+       function hapusCart($id) {
+            var id_detail = $id;
+            $.ajax({
+                url: "{{ url('hapus-cart') }}",
+                type: 'POST',
+                data: {id_detail:id_detail},
+                success: function(data) {
+                    showCart();
+                    showFormCart();
+                }
+            });
+       }
+        //    SHOW DETAIL PEMBELIAN
        showCart();
         function showCart() {
             var no_transaksi = $("#no_transaksi").val();
@@ -261,6 +290,7 @@
                 }
             });
         }
+        // SHOW FORM TRASNAKSI (TOTAL ITEM, HARGA, DISKOn DLL)
         showFormCart();
         function showFormCart() {
             var no_transaksi = $("#no_transaksi").val();
@@ -269,9 +299,118 @@
                 type: 'POST',
                 data:{no_transaksi:no_transaksi},
                 success: function(data) {
-                    $('#total_harga').val(0);
+                    for (let x = 0; x < data.length; x++) {
+                        var a = data[x].subtotal;
+                        var b = data[x].total_diskon;
+                        $('#total_harga').val(convertToRupiah(a));
+                        $('#total_item').val(data[x].total_item);
+                        $('#total_diskon').val(convertToRupiah(b));
+                    }
+                    var c = convertToRupiah(a-b);
+                    $("#grand_total").val(c);
+                    
+                    var d = $("#bayar").val();
+                    var e = convertToAngka(d);
+
+                    
                 }
             });
+        }
+
+        // AKSI BAYAR
+        let dengan_rupiah = document.getElementById('bayar');
+            dengan_rupiah.addEventListener('keyup', function (e) {
+                dengan_rupiah.value = formatRupiah(this.value, 'Rp. ');
+                let grand_total_rupiah = $("#grand_total").val(); 
+                let bayar_rupiah = $("#bayar").val();
+                let grand_total = convertToAngka(grand_total_rupiah);
+                let bayar = convertToAngka(bayar_rupiah);
+                let kembali = bayar - grand_total;
+               
+                $("#kembali").val(convertToRupiah(kembali));
+
+             
+
+                if (bayar >= grand_total) {
+                    var element = document.getElementById("simpan_transaksi");
+                    element.classList.remove("disabled");
+                }else{
+                
+                }
+        });
+
+        // SIMPAN TRANSAKSI
+        function simpanTransaksi() {
+            // normal item
+            var no_transaksi = $("#no_transaksi").val();
+            var id_member = $("#id_member").val();
+            var tgl = $("#tgl").val();
+            var total_item = $("#total_item").val();
+            var id_user = {{ Auth::user()->id }};
+
+            // versi rupiah
+            let grand_total_rupiah = $("#grand_total").val(); 
+            let diskon_total_rupiah = $("#total_diskon").val(); 
+            let bayar_rupiah = $("#bayar").val(); 
+            let kembali_rupiah = $("#kembali").val();
+            
+            // versi angka
+            let grand_total = convertToAngka(grand_total_rupiah);
+            let diskon = convertToAngka(diskon_total_rupiah);
+            let bayar = convertToAngka(bayar_rupiah);
+            let kembali = convertToAngka(kembali_rupiah);
+
+            // AJAX SIMPAN
+            $.ajax({
+                url: "{{ url('simpan-penjualan') }}",
+                type: 'POST',
+                data:{no_transaksi:no_transaksi,id_member:id_member,total_item:total_item,total_harga:grand_total,diskon:diskon,bayar:bayar,kembali:kembali,id_user:id_user},
+                success: function(data) {
+                    cetakFaktur(no_transaksi);
+                },
+                error: function(data){
+                    cetakFaktur(no_transaksi);
+                }
+            });
+            
+        }
+
+        // cetak faktur
+
+        function cetakFaktur(no_transaksi) {
+            var no_transaksi = no_transaksi;
+            $("#id_faktur").val(no_transaksi);
+            $('#fakturModal').modal('show');
+        }
+
+        // FUNGSI RUPIAH ANGKA
+        function convertToRupiah(angka)
+        {
+        var rupiah = '';		
+        var angkarev = angka.toString().split('').reverse().join('');
+        for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+        return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+        }
+
+        function convertToAngka(rupiah)
+        {
+            return parseInt(rupiah.replace(/,.*|[^0-9]/g, ''), 10);
+        }
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
         }
     </script>
 

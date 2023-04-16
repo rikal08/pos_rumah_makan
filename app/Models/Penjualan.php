@@ -14,6 +14,7 @@ class Penjualan extends Model
     protected $primaryKey = 'id_penjualan';
 
     protected $fillable = [
+        'no_transaksi',
         'id_member',
         'total_item',
         'total_harga',
@@ -21,6 +22,5 @@ class Penjualan extends Model
         'bayar',
         'kembali',
         'id_user',
-        'created_at'
     ];
 }

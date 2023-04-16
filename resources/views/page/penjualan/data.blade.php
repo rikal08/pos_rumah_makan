@@ -30,7 +30,7 @@
     </div>
     <div class="card-header py-3">
         <a href="{{ url('pos') }}" class="btn-sm btn-success">Tambah Data</a>
-        <a href="" data-toggle="modal" data-target="#cetakLaporan" class="btn-sm btn-danger"><i class="fa fa-print"></i> Laporan Pengeluaran</a>
+        <a href="" data-toggle="modal" data-target="#cetakLaporan" class="btn-sm btn-danger"><i class="fa fa-print"></i> Laporan Penjualan</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -39,6 +39,7 @@
                     <tr>
                         <th>No</th>
                         <th>Waktu Transaksi</th>
+                        <th>No Transaksi</th>
                         <th>Nama Pembeli</th>
                         <th>Total Item</th>
                         <th>Total Harga</th>
@@ -57,6 +58,7 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $data->created_at }}</td>
+                        <td>{{ $data->no_transaksi }}</td>
                         <td>
                             @if ($data->id_member==0)
                                 Non Member
@@ -71,14 +73,41 @@
                         <td>Rp. {{ number_format($data->kembali) }}</td>
                         <td>{{  $data->name }}</td>
                         <td>
-                            <a href="" class="btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                            <a href="" class="btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                            <a href="" data-toggle="modal" data-target="#fakturModal{{ $data->no_transaksi }}" class="btn-sm btn-danger"><i class="fa fa-print"></i></a>
+                            <a href="{{ url('penjualan',$data->no_transaksi) }}" class="btn-sm btn-primary"><i class="fa fa-eye"></i></a>
                         </td>
                     </tr>
+                    {{-- faktur modal --}}
+                    <div class="modal fade" id="fakturModal{{ $data->no_transaksi }}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Transaksi Berhasil</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="{{ url('cetak-faktur') }}" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <input type="text" name="no_transaksi" value="{{ $data->no_transaksi }}" hidden id="id_faktur">
+                                    <p align="center">Transaksi Berhasil Silahkan Cetak Faktur</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger"> <i class="fa fa-print"></i> Cetak</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+@include('page.penjualan.form-laporan')
 @endsection

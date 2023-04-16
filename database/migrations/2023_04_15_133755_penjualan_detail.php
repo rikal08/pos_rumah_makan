@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('penjualan_detail', function (Blueprint $table) {
             $table->id('id_penjualan_detail');
-            $table->integer('no_transaksi');
+            $table->string('no_transaksi');
             $table->integer('id_produk');
             $table->integer('harga_jual');
             $table->integer('jumlah');
-            $table->integer('diskon');
+            $table->integer('sub_total_diskon');
             $table->integer('subtotal');
             $table->timestamps();
         });

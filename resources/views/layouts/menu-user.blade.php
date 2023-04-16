@@ -1,6 +1,7 @@
 <div class="sidebar-heading">
     Interface
 </div>
+@if (Auth::user()->level==1 || Auth::user()->level==2)
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-table"></i>
@@ -14,6 +15,9 @@
         </div>
     </div>
 </li>
+@else
+    
+@endif
 
 <li class="nav-item {{ request()->is('member') ? 'active' : ''}}">
     <a class="nav-link" href="{{ url('member') }}">

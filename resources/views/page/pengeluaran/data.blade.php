@@ -69,4 +69,5 @@
     </div>
 </div>
 @include('page.pengeluaran.form-cetak')
+@include('page.pengeluaran.tambah')
 @endsection
