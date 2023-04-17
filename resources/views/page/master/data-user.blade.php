@@ -55,7 +55,7 @@
                                     @if ($data->level == 1)
                                         <span class="badge bg-danger text-white">Admin</span>
                                     @elseif($data->level == 2)
-                                        <span class="badge bg-primary text-white">Pimpinan</span>
+                                        <span class="badge bg-primary text-white">Pimilik</span>
                                     @else
                                         <span class="badge bg-success text-white">Kasir</span>
                                     @endif
@@ -180,7 +180,7 @@
                             <label for="">Level</label>
                             <select name="level" id="level" class="form-control">
                                 <option value="1">Admin</option>
-                                <option value="2">Pimpinan</option>
+                                <option value="2">Pimilik</option>
                                 <option value="3">Kasir</option>
                             </select>
                         </div>
