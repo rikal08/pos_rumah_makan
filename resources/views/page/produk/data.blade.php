@@ -42,9 +42,10 @@
                     </select>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <button type="submit" id="cari_by_kategori" class="btn btn-primary">Cari</button>
                 <a href="" data-toggle="modal" data-target="#cetakLaporan" class="btn btn-danger"><i class="fa fa-print"></i> Cetak Laporan</a>
+                <a href="{{ url('update-stok') }}" class="btn btn-success"><i class="fa fa-check"></i> Update Stok</a>
             </div>
         </div>
     </div>
@@ -58,7 +59,6 @@
                         <th>Kategori</th>
                         <th>Nama Produk</th>
                         <th>Harga</th>
-                        <th>Diskon</th>
                         <th>Stok</th>
                         <th>Aksi</th>
                     </tr>

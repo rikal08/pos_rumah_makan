@@ -41,7 +41,7 @@ class PosController extends Controller
     public function show_cart(Request $request)
     {
         $cart = PenjualanDetail::query()
-                ->select('penjualan_detail.*','produk.nama_produk','produk.diskon','produk.harga')
+                ->select('penjualan_detail.*','produk.nama_produk','produk.harga')
                 ->join('produk','penjualan_detail.id_produk','=','produk.id_produk')
                 ->where('penjualan_detail.no_transaksi',$request->no_transaksi)->get();
         
@@ -52,12 +52,11 @@ class PosController extends Controller
     {
         $subtotal = PenjualanDetail::where('no_transaksi',$request->no_transaksi)->sum('subtotal');
         $total_item = PenjualanDetail::where('no_transaksi',$request->no_transaksi)->sum('jumlah');
-        $total_diskon = PenjualanDetail::where('no_transaksi',$request->no_transaksi)->sum('sub_total_diskon');
+   
 
         $data = array([
             'subtotal'=>$subtotal,
             'total_item'=>$total_item,
-            'total_diskon'=>$total_diskon,
         ]);
 
         return response()->json($data);
@@ -72,8 +71,7 @@ class PosController extends Controller
 
         if ($pen_detail==true) {
            $pen_detail->jumlah = $pen_detail->jumlah + $request->jumlah;
-           $pen_detail->sub_total_diskon = $pen_detail->sub_total_diskon + ($produk->diskon * $request->jumlah);
-           $pen_detail->subtotal = ($produk->harga * $pen_detail->jumlah) - $produk->diskon * ($pen_detail->jumlah);
+           $pen_detail->subtotal = ($produk->harga * $pen_detail->jumlah);
            $pen_detail->save();
         } else {
             PenjualanDetail::create([
@@ -81,8 +79,7 @@ class PosController extends Controller
                 'id_produk'=>$request->id_produk,
                 'harga_jual'=>$produk->harga,
                 'jumlah'=>$request->jumlah,
-                'sub_total_diskon'=>$produk->diskon,
-                'subtotal'=>($produk->harga * $request->jumlah) - $produk->diskon,
+                'subtotal'=>($produk->harga * $request->jumlah),
             ]);
         }
 
@@ -99,8 +96,8 @@ class PosController extends Controller
 
        
            $pen_detail->jumlah = $pen_detail->jumlah - 1;
-           $pen_detail->sub_total_diskon = $pen_detail->sub_total_diskon - ($produk->diskon * 1);
-           $pen_detail->subtotal = ($produk->harga * $pen_detail->jumlah) - $produk->diskon * ($pen_detail->jumlah);
+
+           $pen_detail->subtotal = ($produk->harga * $pen_detail->jumlah);
            $pen_detail->save();
         
 
@@ -120,12 +117,20 @@ class PosController extends Controller
             'no_transaksi' => ['unique:penjualan'],
         ]);
 
+        $penjualan_detail = PenjualanDetail::where('no_transaksi',$request->no_transaksi)->get();
+
+        foreach ($penjualan_detail as $key) {
+            $produk = Produk::find($key->id_produk);
+            $produk->stok = $produk->stok - $key->jumlah;
+            $produk->save();
+        }
+
         Penjualan::create([
             'no_transaksi'=> $request->no_transaksi,
-            'id_member'=> $request->id_member,
+            'id_pelanggan'=> $request->id_member,
             'total_item'=> $request->total_item,
             'total_harga'=> $request->total_harga,
-            'diskon'=> $request->diskon,
+          
             'bayar'=> $request->bayar,
             'kembali'=> $request->kembali,
             'id_user'=> $request->id_user,
@@ -135,12 +140,12 @@ class PosController extends Controller
     public function cetak_faktur(Request $request)
     {
         $penjualan = Penjualan::query()
-        ->select('penjualan.*','member.nama_member','users.name')
-        ->leftjoin('member','penjualan.id_member','=','member.id_member')
+        ->select('penjualan.*','pelanggan.nama_pelanggan','users.name')
+        ->leftjoin('pelanggan','penjualan.id_pelanggan','=','pelanggan.id_pelanggan')
         ->leftjoin('users','penjualan.id_user','=','users.id')
         ->where('penjualan.no_transaksi',$request->no_transaksi)->first();
         $detail = PenjualanDetail::query()
-                ->select('penjualan_detail.*','produk.nama_produk','produk.diskon','produk.harga')
+                ->select('penjualan_detail.*','produk.nama_produk','produk.harga')
                 ->join('produk','penjualan_detail.id_produk','=','produk.id_produk')
                 ->where('penjualan_detail.no_transaksi',$request->no_transaksi)->get();
         $customPaper = array(0,0,400,500);

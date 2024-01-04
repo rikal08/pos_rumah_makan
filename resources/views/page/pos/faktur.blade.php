@@ -118,12 +118,10 @@
  
     <center id="top">
       <div class="logo">
-        <img width="60px"
-                    src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('template/img/bg.png'))) }}"
-                    alt="" />
+        <img width="160px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('template/img/bg2.jpeg'))) }}" alt="" />
       </div>
       <div class="info"> 
-        <h3>RM. CAHAYA PERKASA</h3>
+        <h3>RM. JUANDA JAYA</h3>
       </div><!--End Info-->
     </center><!--End InvoiceTop-->
  
@@ -133,10 +131,10 @@
         <p> 
           No. Transaksi : {{ $penjualan->no_transaksi }}</br>
           Tanggal  : {{ $penjualan->created_at }}</br>
-          Pelanggan   :  @if ($penjualan->id_member==0)
+          Pelanggan   :  @if ($penjualan->id_pelanggan==0)
                         -
                         @else
-                          {{ $penjualan->nama_member }}
+                          {{ $penjualan->nama_pelanggan }}
                         @endif</br>
         </p>
       </div>
@@ -167,16 +165,8 @@
                                 <td class="Rate"><h2>Total Harga</h2></td>
                                 <td class="payment"><h2>Rp. {{ number_format($penjualan->total_harga) }}</h2></td>
                             </tr>
-                            <tr class="tabletitle">
-                                <td></td>
-                                <td class="Rate"><h2>Total Diskon</h2></td>
-                                <td class="payment"><h2>Rp. {{ number_format($penjualan->diskon) }}</h2></td>
-                            </tr>
-                            <tr class="tabletitle">
-                                <td></td>
-                                <td class="Rate"><h2>Harga Akhir</h2></td>
-                                <td class="payment"><h2>Rp. {{ number_format($penjualan->total_harga) }}</h2></td>
-                            </tr>
+                           
+            
                             <tr class="tabletitle">
                                 <td></td>
                                 <td class="Rate"><h2>Jumlah Bayar</h2></td>
@@ -194,6 +184,8 @@
                     <div id="legalcopy">
                         <p class="legal"><strong>Terimakasih Telah Berbelanja!</strong>  Barang yang sudah dibeli tidak dapat dikembalikan. Jangan lupa berkunjung kembali
                         </p>
+                        <p><b>Hormat Kami,</b></p>
+                        <p>{{ $penjualan->name }}</p>
                     </div>
  
                 </div><!--End InvoiceBot-->

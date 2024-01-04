@@ -79,7 +79,7 @@
                                 <td>Product</td>
                                 <td>Qty</td>
                                 <td>Rp</td>
-                                <td>%</td>
+                               
                                 <td>SubTotal</td>
                                 <td>Aksi</td>
                             </tr>
@@ -96,11 +96,11 @@
                             style="height: 30px ">
                     </div>
                     <div class="form-group">
-                        <label for="">Member</label>
+                        <label for="">Pelanggan</label>
                         <select name="" class="form-control w-100" style="height: 30px " id="id_member">
-                            <option value="0" selected>No Member</option>
+                            <option value="0" selected>Tidak ada</option>
                             @foreach ($member as $data)
-                                <option value="{{ $data->id_member }}">{{ $data->nama_member }}</option>
+                                <option value="{{ $data->id_pelanggan }}">{{ $data->nama_pelanggan }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -114,15 +114,8 @@
                             <td>Total Harga (Rp)</td>
                             <td><input style="text-align: right" readonly id="total_harga" class="form-control" type="text"></td>
                         </tr>
-                        <tr>
-                            <td>Diskon (Rp)</td>
-                            <td><input style="text-align: right" readonly class="form-control" id="total_diskon" type="text"></td>
-                        </tr>
-
-                        <tr>
-                            <td>Grand Total (Rp)</td>
-                            <td><input style="text-align: right" readonly class="form-control" id="grand_total" type="text"></td>
-                        </tr>
+                       
+                       <input hidden style="text-align: right" readonly class="form-control" id="grand_total" type="text">
                         <tr>
                             <td>Bayar (Rp)</td>
                             <td><input style="text-align: right" type="text" id="bayar" class="form-control"></td>

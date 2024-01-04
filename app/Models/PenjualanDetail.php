@@ -18,7 +18,6 @@ class PenjualanDetail extends Model
         'id_produk',
         'harga_jual',
         'jumlah',
-        'sub_total_diskon',
         'subtotal',
     ];
 }

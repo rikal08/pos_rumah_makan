@@ -52,7 +52,6 @@ class ProdukController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nama_produk' => 'required',
             'harga'=> 'required|numeric',
-            'diskon'=> 'required|numeric',
             'stok'=> 'required|numeric',
         ]);
 
@@ -63,7 +62,6 @@ class ProdukController extends Controller
             'id_kategori'=>$request->id_kategori,
             'nama_produk'=>strtoupper($request->nama_produk),
             'harga'=>$request->harga,
-            'diskon'=>$request->diskon,
             'stok'=>$request->stok,
             'foto'=>$imageName,
         ]);
@@ -103,7 +101,6 @@ class ProdukController extends Controller
         $request->validate([
             'nama_produk' => 'required',
             'harga'=> 'required|numeric',
-            'diskon'=> 'required|numeric',
             'stok'=> 'required|numeric',
         ]);
 
@@ -112,7 +109,6 @@ class ProdukController extends Controller
         $produk->id_kategori = $request->id_kategori;
         $produk->nama_produk = strtoupper($request->nama_produk);
         $produk->harga = $request->harga;
-        $produk->diskon = $request->diskon;
         $produk->stok = $request->stok;
 
         $produk->save();
@@ -142,6 +138,22 @@ class ProdukController extends Controller
 
         return redirect('produk')->with('error',"Data Berhasil Dihapus");
 
+
+    }
+
+    public function update_stok()
+    {
+        $produk = Produk::all();
+
+        foreach($produk as $item)
+        {
+            $produk = Produk::find($item->id_produk);
+            $produk->stok = 50;
+
+            $produk->save();
+        }
+
+        return redirect('produk')->with('success',"Stok Berhasil Diupdate ");
 
     }
 }

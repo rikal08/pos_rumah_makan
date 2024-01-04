@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <!-- Pending Requests Card Example -->
+    {{-- <!-- Pending Requests Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
@@ -60,9 +60,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <!-- Earnings (Monthly) Card Example -->
+    {{-- <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
@@ -78,12 +78,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
   
 
     <div class="col-lg-12 text-center">
-        <img width="50%" src="{{ asset('template/img/bg.png') }}" class="img-fluid" alt="">
+        <img width="50%" src="{{ asset('template/img/bg2.jpeg') }}" class="img-fluid" alt="">
     </div>
 </div>
 @endsection

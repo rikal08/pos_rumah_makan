@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('id_kategori');
             $table->string('nama_produk');
             $table->integer('harga');
-            $table->integer('diskon')->default(0);
             $table->integer('stok')->default(0);
             $table->text('foto')->default(0);
             $table->timestamps();

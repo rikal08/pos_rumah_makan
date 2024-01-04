@@ -39,14 +39,11 @@
                          <input type="number" class="form-control" name="harga" value="0" placeholder="Masukan Harga Produk...">
                      </div>
                  
-                     <div class="form-group">
-                         <label for="">Diskon</label>
-                         <input type="number" class="form-control" name="diskon" value="0" placeholder="Masukan Diskon Produk...">
-                     </div>
+                    
                  
                      <div class="form-group">
                          <label for="">Stok</label>
-                         <input type="number" class="form-control" name="stok" value="0" placeholder="Masukan Diskon Produk...">
+                         <input type="number" class="form-control" name="stok" value="0" placeholder="Masukan Stok Produk...">
                      </div>
                  </div>
                  <div class="modal-footer">

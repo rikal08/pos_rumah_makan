@@ -1,21 +1,21 @@
 <!-- Tambah -->
-<div class="modal fade" id="updateModal{{ $data->id_member }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="updateModal{{ $data->id_pelanggan }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Member</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Update pelanggan</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form action="{{ url('member',$data->id_member) }}" method="POST">
+        <form action="{{ url('pelanggan',$data->id_pelanggan) }}" method="POST">
             @method('PUT')
             @csrf
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="">Nama Member</label>
-                    <input type="text" class="form-control" value="{{ $data->nama_member }}" placeholder="Masukan Nama.." name="nama_member">
+                    <label for="">Nama pelanggan</label>
+                    <input type="text" class="form-control" value="{{ $data->nama_pelanggan }}" placeholder="Masukan Nama.." name="nama_pelanggan">
                 </div>
                 @php
                     $hp =$data->telepon;

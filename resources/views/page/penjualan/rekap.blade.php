@@ -40,38 +40,40 @@
 
         <tr>
             <td style="width: 170px"> <img width="160px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('template/img/bg2.jpeg'))) }}" alt="" /></td>
-            <td style="line-height: 10px"><h2>Rumah Makan</h2><h1> YUANDA JAYA</h1> <p>Balai Makam, Kec. Mandau, Kabupaten Bengkalis, Riau 28983  (+62) 8674534567 | rmyuandajaya@gmail.com</p><h3>Laporan Data Pengeluaran</h3></td>
+            <td style="line-height: 10px"><h2>Rumah Makan</h2><h1> YUANDA JAYA</h1> <p>Balai Makam, Kec. Mandau, Kabupaten Bengkalis, Riau 28983  (+62) 8674534567 | rmyuandajaya@gmail.com</p><h3>Rekap Data Penjualan <br><br><br> Tahun {{ $tahun }}</h3></td>
         </tr>
     </table>
     <hr style="border: 2px solid #222">
     <br>
-    <span style="background-color: #bbb;padding: 10px; width:100%;color:#fff;text-align:center;">Waktu Laporan:
-        {{ $tgl_awal }} / {{ $tgl_akhir }}</span>
-    <br><br><br>
+    
     <table id="customers">
         <tr>
             <th>No</th>
-            <th>Waktu Input</th>
-            <th>Deskripsi</th>
-            <th>Nominal</th>
+            <th>Nama Menu</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
+            <th>Total</th>
         </tr>
         @php
-            $no = 1;
-            $total =0;
+        $no=1;
+        $total=0;
         @endphp
-        @foreach ($pengeluaran as $data)
-            {{ $total = $total+$data->nominal }}
-            <tr>
-                <td>{{ $no++ }}</td>
-                <td>{{ $data->created_at }}</td>
-                <td>{{ $data->deskripsi }}</td>
-                <td>Rp. {{ number_format($data->nominal, 2) }}</td>
-            </tr>
+        @foreach ($detail as $data)
+        @php
+            $total = $total + $data->harga_jual * $data->all_jumlah;
+        @endphp
+        <tr>
+            <td>{{ $no++ }}</td>
+            <td>{{  $data->nama_produk }}</td>
+            <td>{{  $data->all_jumlah }}</td>
+            <td>Rp. {{ number_format( $data->harga_jual )}}</td>
+            <td>Rp. {{  number_format($data->harga_jual * $data->all_jumlah) }}</td>
+           
         @endforeach
-            <tr>
-              <td colspan="3">Total Pengeluaran</td>
-              <td>Rp. {{ number_format($total,2) }}</td>
-            </tr>
+        <tr>
+            <td colspan="4">Total Penjualan</td>
+            <td>Rp. {{ number_format($total, 2) }}</td>
+        </tr>
 
     </table>
     <br><br><br>
@@ -80,6 +82,7 @@
             <td style="text-align: center">Dilaporan Oleh: <br><br><br><br>({{ Auth::user()->name }})</td>
             <td style="text-align: center">{{ date('d-m-Y') }}<br>Mengetahui Pimpinan: <br><br><br><br>(Yuanda)</td>
         </tr>
+        
     </table>
 
 </body>

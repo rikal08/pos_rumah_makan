@@ -42,7 +42,7 @@
                                 <td>Product</td>
                                 <td>Qty</td>
                                 <td>Rp</td>
-                                <td>Dics %</td>
+                             
                                 <td>SubTotal</td>
                                 {{-- <td>Aksi</td> --}}
                             </tr>
@@ -57,7 +57,7 @@
                                     <td>{{ $data->nama_produk }}</td>
                                     <td>{{ $data->jumlah }}</td>
                                     <td>{{ number_format($data->harga_jual) }}</td>
-                                    <td>-{{ number_format($data->sub_total_diskon) }}</td>
+                                 
                                     <td>{{ number_format($data->subtotal) }}</td>
                                     {{-- <td>
                                         <a onclick="kurangCart({{ $data->id_penjualan_detail }})"

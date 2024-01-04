@@ -18,21 +18,21 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
-            'name' => 'Budi',
-            'email' => 'budi@gmail.com',
+            'name' => 'Prima',
+            'email' => 'prima@gmail.com',
             'password' => Hash::make('123'),
             'level'=>1
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Cahaya Perkasa',
-            'email' => 'cahayaperkasa@gmail.com',
+            'name' => 'RM. Yuanda Jaya',
+            'email' => 'yuandajaya@gmail.com',
             'password' => Hash::make('123'),
             'level'=>2
         ]);
         \App\Models\User::factory()->create([
-            'name' => 'Shinta',
-            'email' => 'shinta@gmail.com',
+            'name' => 'Putri',
+            'email' => 'putri@gmail.com',
             'password' => Hash::make('123'),
             'level'=>3
         ]);

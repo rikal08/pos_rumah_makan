@@ -39,15 +39,8 @@
 
 
         <tr>
-            <td style="width: 150px"> <img width="110px"
-                    src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('template/img/bg.png'))) }}"
-                    alt="" /></td>
-            <td style="line-height: 10px">
-                <h2>Rumah Makan</h2>
-                <h1> CAHAYA PERKASA</h1>
-                <p>Jl. By Pass, Kec Lubuk Begalung (+62) 8674534567 | rmcahayaperkasa@gmail.com</p>
-                <h3>Laporan Penjualan</h3>
-            </td>
+            <td style="width: 170px"> <img width="160px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('template/img/bg2.jpeg'))) }}" alt="" /></td>
+            <td style="line-height: 10px"><h2>Rumah Makan</h2><h1> YUANDA JAYA</h1> <p>Balai Makam, Kec. Mandau, Kabupaten Bengkalis, Riau 28983  (+62) 8674534567 | rmyuandajaya@gmail.com</p><h3>Laporan Data Penjualan</h3></td>
         </tr>
     </table>
     <hr style="border: 2px solid #222">
@@ -61,9 +54,9 @@
             <th>Waktu Transaksi</th>
             <th>No Transaksi</th>
             <th>Nama Pelanggan</th>
+            <th>Pembelian</th>
             <th>Total Item</th>
             <th>Total Harga</th>
-            <th>Diskon</th>
             <th>Bayar</th>
             <th>Kembali</th>
             <th>Nama Kasir</th>
@@ -79,21 +72,29 @@
             <td>{{ $data->created_at }}</td>
             <td>{{ $data->no_transaksi }}</td>
             <td>
-                @if ($data->id_member==0)
-                    -
+                @if ($data->id_pelanggan==0)
+                    Tidak ada nama pelanggan
                 @else
-                    {{ $data->nama_member }}
+                    {{ $data->nama_pelanggan }}
                 @endif
+            </td>
+            <td>
+                @foreach ($detail as $item)
+                    @if ($data->no_transaksi==$item->no_transaksi)
+                        <p>- ({{ $item->jumlah }}) * {{ $item->nama_produk }}</p>
+                    @else
+                        
+                    @endif
+                @endforeach
             </td>
             <td>{{ $data->total_item }}</td>
             <td>Rp. {{ number_format($data->total_harga) }}</td>
-            <td>Rp. {{ number_format($data->diskon) }}</td>
             <td>Rp. {{ number_format($data->bayar) }}</td>
             <td>Rp. {{ number_format($data->kembali) }}</td>
             <td>{{  $data->name }}</td>
         @endforeach
         <tr>
-            <td colspan="5">Total Penjualan</td>
+            <td colspan="6">Total Penjualan</td>
             <td colspan="5">Rp. {{ number_format($total, 2) }}</td>
         </tr>
 
@@ -101,9 +102,10 @@
     <br><br><br>
     <table style="width: 100%" align="center">
         <tr>
-            <td style="text-align: center">Dilaporan Oleh: <br><br><br><br>(................................)</td>
-            <td style="text-align: center">Mengetahui Pimpinan: <br><br><br><br>(................................)</td>
+            <td style="text-align: center">Dilaporan Oleh: <br><br><br><br>({{ Auth::user()->name }})</td>
+            <td style="text-align: center">{{ date('d-m-Y') }}<br>Mengetahui Pimpinan: <br><br><br><br>(Yuanda)</td>
         </tr>
+        
     </table>
 
 </body>

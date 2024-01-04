@@ -8,7 +8,6 @@
         <td>{{ $data->nama_kategori }}</td>
         <td>{{ $data->nama_produk }}</td>
         <td>Rp. {{ number_format($data->harga, 2) }}</td>
-        <td>Rp. {{ number_format($data->diskon, 2) }}</td>
         <td>{{ number_format($data->stok) }}</td>
 
         <td>

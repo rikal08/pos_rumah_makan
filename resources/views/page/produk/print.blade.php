@@ -32,8 +32,8 @@
    
         
     <tr>
-        <td style="width: 150px"> <img width="110px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('template/img/bg.png'))) }}" alt="" /></td>
-        <td style="line-height: 10px"><h2>Rumah Makan</h2><h1> CAHAYA PERKASA</h1> <p>Jl. By Pass, Kec Lubuk Begalung  (+62) 8674534567 | rmcahayaperkasa@gmail.com</p><h3>Laporan Data Produk</h3></td>
+        <td style="width: 170px"> <img width="160px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('template/img/bg2.jpeg'))) }}" alt="" /></td>
+        <td style="line-height: 10px"><h2>Rumah Makan</h2><h1> YUANDA JAYA</h1> <p>Balai Makam, Kec. Mandau, Kabupaten Bengkalis, Riau 28983  (+62) 8674534567 | rmyuandajaya@gmail.com</p><h3>Laporan Data Produk</h3></td>
     </tr>
 </table>
 <hr style="border: 2px solid #222">
@@ -46,7 +46,6 @@
         <th>Kategori</th>
         <th>Nama Produk</th>
         <th>Harga</th>
-        <th>Diskon</th>
         <th>Stok</th>
     </tr>
     @php
@@ -58,7 +57,6 @@
         <td>{{ $data->nama_kategori }}</td>
         <td>{{ $data->nama_produk }}</td>
         <td>Rp. {{ number_format($data->harga, 2) }}</td>
-        <td>Rp. {{ number_format($data->diskon, 2) }}</td>
         <td>{{ number_format($data->stok) }}</td>
     </tr>
 @endforeach
@@ -66,8 +64,8 @@
 <br><br><br>
 <table style="width: 100%" align="center">
     <tr>
-        <td style="text-align: center">Dilaporan Oleh: <br><br><br><br>(................................)</td>
-        <td style="text-align: center">Mengetahui Pimpinan: <br><br><br><br>(................................)</td>
+        <td style="text-align: center">Dilaporan Oleh: <br><br><br><br>({{ Auth::user()->name }})</td>
+        <td style="text-align: center">{{ date('d-m-Y') }}<br>Mengetahui Pimpinan: <br><br><br><br>(Yuanda)</td>
     </tr>
 </table>
 

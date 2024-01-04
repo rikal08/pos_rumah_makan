@@ -19,10 +19,10 @@
     
 @endif
 
-<li class="nav-item {{ request()->is('member') ? 'active' : ''}}">
-    <a class="nav-link" href="{{ url('member') }}">
+<li class="nav-item {{ request()->is('pelanggan') ? 'active' : ''}}">
+    <a class="nav-link" href="{{ url('pelanggan') }}">
         <i class="fas fa-fw fa-users"></i>
-        <span>Member</span></a>
+        <span>Pelanggan</span></a>
 </li>
 
 <li class="nav-item {{ request()->is('produk') ? 'active' : ''}}">
@@ -31,11 +31,11 @@
         <span>Produk</span></a>
 </li>
 
-<li class="nav-item {{ request()->is('pengeluaran') ? 'active' : ''}}">
+{{-- <li class="nav-item {{ request()->is('pengeluaran') ? 'active' : ''}}">
     <a class="nav-link" href="{{ url('pengeluaran') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Pengeluaran</span></a>
-</li>
+</li> --}}
 
 <li class="nav-item {{ request()->is('penjualan') ? 'active' : ''}}">
     <a class="nav-link" href="{{ url('penjualan') }}">

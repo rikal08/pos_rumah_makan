@@ -21,9 +21,9 @@ class MemberController extends Controller
     protected function store(Request $request)
     {
         $request->validate([
-            'nama_member' => ['required', 'string', 'max:255'],
-            'telepon' => ['required', 'string', 'max:20', 'unique:member'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:member'],
+            'nama_pelanggan' => ['required', 'string', 'max:255'],
+            'telepon' => ['required', 'string', 'max:20', 'unique:pelanggan'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:pelanggan'],
             'alamat' => ['required'],
         ]);
 
@@ -51,13 +51,13 @@ class MemberController extends Controller
         }
 
         Member::create([
-            'nama_member' => $request->nama_member,
+            'nama_pelanggan' => $request->nama_pelanggan,
             'telepon' => $hp,
             'email' => $request->email,
             'alamat'=> $request->alamat,
         ]);
 
-        return redirect('/member')->with('success',"Data Berhasil Disimpan");
+        return redirect('/pelanggan')->with('success',"Data Berhasil Disimpan");
 
 
     }
@@ -67,8 +67,8 @@ class MemberController extends Controller
         $member = Member::find($id);
 
         $request->validate([
-            'nama_member' => ['required', 'string', 'max:255'],
-            'telepon' => ['required', 'string', 'max:20', 'unique:member'],
+            'nama_pelanggan' => ['required', 'string', 'max:255'],
+            'telepon' => ['required', 'string', 'max:20', 'unique:pelanggan'],
             'alamat' => ['required'],
         ]);
 
@@ -95,13 +95,13 @@ class MemberController extends Controller
             }
         }
 
-        $member->nama_member = $request->nama_member;
+        $member->nama_pelanggan = $request->nama_pelanggan;
         $member->telepon = $hp;
         $member->email = $request->email;
         $member->alamat = $request->alamat;
         $member->save();
 
-        return redirect('/member')->with('success',"Data Berhasil Diupdate");
+        return redirect('/pelanggan')->with('success',"Data Berhasil Diupdate");
     }
 
     public function destroy($id)
@@ -110,6 +110,6 @@ class MemberController extends Controller
 
         $member->delete();
 
-        return redirect('/member')->with('error',"Data Berhasil Dihapus");
+        return redirect('/pelanggan')->with('error',"Data Berhasil Dihapus");
     }
 }

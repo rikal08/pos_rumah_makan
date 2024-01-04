@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>RM. Cahaya Perkasa - Dashboard</title>
+    <title>RM. Yuanda Jaya - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('template') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,11 +33,11 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion {{ request()->is('pos') ? 'toggled' : ''}}" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion {{ request()->is('pos') ? 'toggled' : ''}}" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-text mx-3">CAHAYA PERKASA</div>
+                <div class="sidebar-brand-text mx-3">Rumah Makan <br>Yuanda Jaya</div>
             </a>
 
             <!-- Divider -->
@@ -121,7 +121,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h5 mb-4 text-gray-800">SISTEM INFORMASI RUMAH MAKAN CAHAYA PERKASA</h1>
+                    <h1 class="h5 mb-4 text-gray-800">SISTEM INFORMASI RUMAH MAKAN YUANDA JAYA</h1>
 
                     @yield('content')
                 </div>
@@ -134,7 +134,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Rumah Makan Cahaya Perkasa 2023</span>
+                        <span>Copyright &copy; Rumah Makan Yuanda Jaya 2023</span>
                     </div>
                 </div>
             </footer>
@@ -290,7 +290,7 @@
                 }
             });
         }
-        // SHOW FORM TRASNAKSI (TOTAL ITEM, HARGA, DISKOn DLL)
+        // SHOW FORM TRASNAKSI (TOTAL ITEM, HARGA, DLL)
         showFormCart();
         function showFormCart() {
             var no_transaksi = $("#no_transaksi").val();
@@ -301,12 +301,13 @@
                 success: function(data) {
                     for (let x = 0; x < data.length; x++) {
                         var a = data[x].subtotal;
-                        var b = data[x].total_diskon;
+                      
+                       
                         $('#total_harga').val(convertToRupiah(a));
                         $('#total_item').val(data[x].total_item);
-                        $('#total_diskon').val(convertToRupiah(b));
+                       
                     }
-                    var c = convertToRupiah(a-b);
+                    var c = convertToRupiah(a);
                     $("#grand_total").val(c);
                     
                     var d = $("#bayar").val();
@@ -350,13 +351,13 @@
 
             // versi rupiah
             let grand_total_rupiah = $("#grand_total").val(); 
-            let diskon_total_rupiah = $("#total_diskon").val(); 
+        
             let bayar_rupiah = $("#bayar").val(); 
             let kembali_rupiah = $("#kembali").val();
             
             // versi angka
             let grand_total = convertToAngka(grand_total_rupiah);
-            let diskon = convertToAngka(diskon_total_rupiah);
+            
             let bayar = convertToAngka(bayar_rupiah);
             let kembali = convertToAngka(kembali_rupiah);
 
@@ -364,7 +365,7 @@
             $.ajax({
                 url: "{{ url('simpan-penjualan') }}",
                 type: 'POST',
-                data:{no_transaksi:no_transaksi,id_member:id_member,total_item:total_item,total_harga:grand_total,diskon:diskon,bayar:bayar,kembali:kembali,id_user:id_user},
+                data:{no_transaksi:no_transaksi,id_member:id_member,total_item:total_item,total_harga:grand_total,bayar:bayar,kembali:kembali,id_user:id_user},
                 success: function(data) {
                     cetakFaktur(no_transaksi);
                 },

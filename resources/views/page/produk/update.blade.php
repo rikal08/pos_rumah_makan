@@ -73,10 +73,7 @@
                         <input type="number" value="{{ $produk->harga }}" class="form-control" name="harga" value="0" placeholder="Masukan Harga Produk...">
                     </div>
                 
-                    <div class="form-group">
-                        <label for="">Diskon</label>
-                        <input type="number" value="{{ $produk->diskon }}" class="form-control" name="diskon" value="0" placeholder="Masukan Diskon Produk...">
-                    </div>
+                    
                 
                     <div class="form-group">
                         <label for="">Stok</label>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Rumah Makan Chaya Perkasa - Login</title>
+    <title>Rumah Makan Yuanda Jaya - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('template') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -15,10 +15,9 @@ class Penjualan extends Model
 
     protected $fillable = [
         'no_transaksi',
-        'id_member',
+        'id_pelanggan',
         'total_item',
         'total_harga',
-        'diskon',
         'bayar',
         'kembali',
         'id_user',

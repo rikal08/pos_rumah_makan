@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('id_produk');
             $table->integer('harga_jual');
             $table->integer('jumlah');
-            $table->integer('sub_total_diskon');
             $table->integer('subtotal');
             $table->timestamps();
         });

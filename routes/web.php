@@ -36,10 +36,11 @@ Route::resource('data-user',UserController::class);
 // route kategori
 Route::resource('kategori', KategoriController::class);
 // member
-Route::resource('member',MemberController::class);
+Route::resource('pelanggan',MemberController::class);
 // produk
 Route::resource('produk',ProdukController::class);
 Route::get('get-produk', [App\Http\Controllers\ProdukController::class, 'get_produk']);
+Route::get('update-stok', [App\Http\Controllers\ProdukController::class, 'update_stok']);
 Route::post('cari-produk', [App\Http\Controllers\ProdukController::class, 'cari_produk']);
 Route::post('cetak-laporan-produk', [App\Http\Controllers\ProdukController::class, 'cetak_laporan']);
 Route::post('hapus-produk', [App\Http\Controllers\ProdukController::class, 'hapus_produk']);
@@ -52,6 +53,7 @@ Route::post('cetak-laporan-pengeluaran', [App\Http\Controllers\PengeluaranContro
 // penjualan
 Route::resource('penjualan',PenjualanController::class);
 Route::post('cetak-laporan-penjualan', [App\Http\Controllers\PenjualanController::class, 'cetak_laporan']);
+Route::post('cetak-rekap-penjualan', [App\Http\Controllers\PenjualanController::class, 'cetak_rekap']);
 
 // POS
 Route::resource('pos',PosController::class);
